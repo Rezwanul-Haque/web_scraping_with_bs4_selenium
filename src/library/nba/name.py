@@ -1,4 +1,4 @@
-"""[This function will get the NBA player names]
+"""[This function will get the NBA player names and links]
 
 Returns:
     [list] -- [player names will be return as a list]
