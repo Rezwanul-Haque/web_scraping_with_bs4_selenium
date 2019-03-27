@@ -3,9 +3,9 @@ sys.path.append("..")
 
 from bs4 import BeautifulSoup
 
-from library import CreatePhantomjsDriver
-from library.nba.name import get_nba_player_name, TAG_NAME, TAGS_CLASS_NAME
 from settings.base import PHANTOMJS_PATH, URL
+from library.drivers import CreatePhantomjsDriver
+from library.nba.name import get_nba_player_name_and_detail_link, TAG_NAME, TAGS_CLASS_NAME
 
 
 # Constants
@@ -14,12 +14,18 @@ PARSER_NAME = 'lxml'  # Very fast, Lenient ## Their are other parsers available
 # row players-wrapper  ## class name which contain all the player names
 ALL_PLAYERS_TAG_NAME = 'div'
 ALL_PLAYERS_TAGS__CLASS_NAME = 'row players-wrapper'
-TAG_NAME = 'span'
-TAGS_CLASS_NAME = 'name-label'
+TAG_NAME = 'a'
+TAGS_CLASS_NAME = 'row playerList'
 # Constants end
 
 # create a phantom js driver
 driver = CreatePhantomjsDriver(PHANTOMJS_PATH)
+
+# Data Structure to store player name and detail link of each player
+class Player:
+    def __init__(self):
+        self.name = ""
+        self.link = ""
 
 # download the html of that url
 driver.get(URL)
@@ -29,16 +35,26 @@ driver.get(URL)
 # create a soup object
 soup = BeautifulSoup(driver.page_source, PARSER_NAME)
 
-# getting the html div in which all the player names reside
-html_div_of_player_names = soup.find(ALL_PLAYERS_TAG_NAME, class_=ALL_PLAYERS_TAGS__CLASS_NAME)
+div = soup.find(ALL_PLAYERS_TAG_NAME, class_=ALL_PLAYERS_TAGS__CLASS_NAME)
 
 # print(div)  # For debugging purpose
 
-nba_player_names = get_nba_player_name(html_div_of_player_names, TAG_NAME, TAGS_CLASS_NAME)
+tag_list = div.find_all(TAG_NAME, class_=TAGS_CLASS_NAME)
+
+player_list = []
+
+for each_a_tag in tag_list:
+    name, link = get_nba_player_name_and_detail_link(each_a_tag)
+
+    new_player = Player()
+    new_player.name = name
+    new_player.link = link
+
+    player_list.append(new_player)
 
 driver.quit()
 
 if __name__ == "__main__":
-    for player_name in nba_player_names:
-        print(player_name)
-
+    for player in player_list:
+        print(player.name)
+        print(player.link)
