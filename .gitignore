@@ -109,3 +109,5 @@ venv.bak/
 # Software dependences
 software/windows
 software/Ubuntu
+
+media/
