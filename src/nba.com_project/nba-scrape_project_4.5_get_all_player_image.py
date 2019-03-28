@@ -1,6 +1,5 @@
 import sys
 import requests
-import time
 sys.path.append("..")
 
 from bs4 import BeautifulSoup
