@@ -1,11 +1,13 @@
 import sys
+import requests
+import time
 sys.path.append("..")
 
 from bs4 import BeautifulSoup
-
 from settings.base import PHANTOMJS_PATH, URL, PARSER_NAME
 from library.drivers import CreatePhantomjsDriver
 from library.nba.name import get_nba_player_name_and_detail_link, TAG_NAME, TAGS_CLASS_NAME
+from library.nba.images import get_nba_player_images
 
 
 # Constants
@@ -21,10 +23,13 @@ TAGS_CLASS_NAME = 'row playerList'
 driver = CreatePhantomjsDriver(PHANTOMJS_PATH)
 
 # Data Structure to store player name and detail link of each player
+
+
 class Player:
     def __init__(self):
         self.name = ""
         self.link = ""
+
 
 # download the html of that url
 driver.get(URL)
@@ -51,9 +56,7 @@ for each_a_tag in tag_list:
 
     player_list.append(new_player)
 
-driver.quit()
 
-if __name__ == "__main__":
-    for player in player_list:
-        print(player.name)
-        print(player.link)
+get_nba_player_images(driver, player_list)
+
+driver.quit()

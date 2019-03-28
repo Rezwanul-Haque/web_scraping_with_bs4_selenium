@@ -4,14 +4,13 @@ sys.path.append("..")
 
 from library.nba.name import get_nba_player_name_and_detail_link, TAG_NAME, TAGS_CLASS_NAME
 from library.drivers import CreatePhantomjsDriver
-from settings.base import PHANTOMJS_PATH, URL
+from settings.base import PHANTOMJS_PATH, URL, PARSER_NAME
 from bs4 import BeautifulSoup
 
 
 # Constants
 # if anyone want to overwrite url then un-comment it here and change it
 URL = "https://www.nba.com/players/bam/adebayo/1628389"
-PARSER_NAME = 'lxml'  # Very fast, Lenient ## Their are other parsers available
 # row players-wrapper  ## class name which contain all the player names
 ALL_PLAYERS_TAG_NAME = 'div'
 ALL_PLAYERS_TAGS__CLASS_NAME = 'row players-wrapper'
@@ -47,7 +46,7 @@ pre_url = 'https:'
 
 img_link = pre_url + img['src']
 
-with open('media/bam.jpg', 'wb') as f:
+with open('media/img/bam.jpg', 'wb') as f:
     f.write(requests.get(img_link).content)
 
 

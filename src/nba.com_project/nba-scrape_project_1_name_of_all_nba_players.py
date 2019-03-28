@@ -10,7 +10,6 @@ from settings.base import PHANTOMJS_PATH, URL
 
 # Constants
 # URL = "" ## if anyone want to overwrite url then un-comment it here and change it
-PARSER_NAME = 'lxml'  # Very fast, Lenient ## Their are other parsers available
 # row players-wrapper  ## class name which contain all the player names
 ALL_PLAYERS_TAG_NAME = 'div'
 ALL_PLAYERS_TAGS__CLASS_NAME = 'row players-wrapper'

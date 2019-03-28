@@ -7,3 +7,5 @@ PHANTOMJS_PATH = BASE_DIR + \
 
 # web page url which should be scrape
 URL = 'https://www.nba.com/players'
+
+PARSER_NAME = 'lxml'  # Very fast, Lenient ## Their are other parsers available

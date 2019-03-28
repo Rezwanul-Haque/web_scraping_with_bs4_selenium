@@ -5,7 +5,7 @@ sys.path.append("..")
 from library.nba.name import get_nba_player_name, get_nba_player_name_and_detail_link, TAG_NAME, TAGS_CLASS_NAME
 from library.nba.detail import get_detail_for_all_player
 from library.drivers import CreatePhantomjsDriver
-from settings.base import PHANTOMJS_PATH, URL
+from settings.base import PHANTOMJS_PATH, URL, PARSER_NAME
 
 from bs4 import BeautifulSoup
 
@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 # Born:
 
 # Constants
-PARSER_NAME = 'lxml'  # Very fast, Lenient ## Their are other parsers available
+
 # row players-wrapper  ## class name which contain all the player names
 ALL_PLAYERS_TAG_NAME = 'div'
 ALL_PLAYERS_TAGS__CLASS_NAME = 'row players-wrapper'
